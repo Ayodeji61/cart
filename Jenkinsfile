@@ -8,16 +8,23 @@ pipeline {
     stage('Code Quality') {
       steps {
         echo 'Code Quality'
+        sh 'env'
       }
     }
 
     stage('Style Checks') {
+      when {
+        branch 'main'
+      }
       steps {
         echo 'Code Quality'
       }
     }
 
     stage('Unit Tests') {
+      when {
+       branch 'main'
+        }
       steps {
         echo 'Unit tests'
       }
@@ -32,6 +39,7 @@ pipeline {
     }
 
     stage('Prepare Artifact') {
+      when { tag "*" }
       steps {
         echo 'Prepare Artifact'
       }
